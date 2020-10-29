@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <math.h>
+int perevod_iz_cc1_v_10(int N,int cc1)
+{
+    int i,sum=0,j=999,K[j];
+    if (cc1<=9)
+    {
+        for (i=0;N!=0;i++)
+        {
+           sum+=N%10*pow(cc1,i);
+           N=N/10;
+        }
+        return sum;
+    }
+    else
+    {
+        for (i=0;N!=0;i++)
+        {
+            sum+=((N%10)+65-10)*pow(cc1,i);
+            N/=10;
+        }
+        return sum;
+    }
+}
+char perevod_iz_10_v_cc2(int perevod_iz_cc1_v_10,int cc2)
+{
+    int j=999,K[j],v10,q,Q;
+    v10=perevod_iz_cc1_v_10;
+    if (cc2>=10)
+    {
+        for(j=0;v10!=0;j++)
+        {
+            K[j]=(v10%cc2)+65-10;
+            v10=v10-(K[j]/cc2);
+            
+            
+        }
+        q=j;
+        Q=j;
+        for (j=0,q;j<q;j++,q--)
+        {
+            char tmp;
+            tmp=K[j];
+            K[j]=K[q];
+            K[q]=tmp;
+        }
+        for (j=0;j!=Q;j++)
+        {
+            printf("%c ",K[j]);
+        }
+        
+        
+    }
+}
+
+int main() 
+{
+   int cc1,cc2,N,K;
+   printf ("Из какой системы переводим\n");
+   scanf("%d",&cc1);
+   printf ("В какую систему переводим\n");
+   scanf("%d", &cc2);
+   printf("Введите число\n");
+   scanf("%d",&N);
+   if (cc2==10)
+   {
+      printf("%d ",perevod_iz_cc1_v_10(N,cc1));
+   }
+   else 
+   {
+       perevod_iz_10_v_cc2(perevod_iz_cc1_v_10,cc2);
+   }
+   
+}
